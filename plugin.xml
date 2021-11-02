@@ -24,5 +24,12 @@
         </config-file>
 
         <source-file src="src/android/TruetimeandroidPlugin.java" target-dir="src/com/navroopsingh/cordova/plugin" />
+        <source-file src="src/android/TrueLog.java" target-dir="src/com/navroopsingh/cordova/plugin" />
+        <source-file src="src/android/SntpClient.java" target-dir="src/com/navroopsingh/cordova/plugin" />
+        <source-file src="src/android/SharedPreferenceCacheImpl.java" target-dir="src/com/navroopsingh/cordova/plugin" />
+        <source-file src="src/android/InvalidNtpServerResponseException.java" target-dir="src/com/navroopsingh/cordova/plugin" />
+        <source-file src="src/android/DiskCacheClient.java" target-dir="src/com/navroopsingh/cordova/plugin" />
+        <source-file src="src/android/CacheInterface.java" target-dir="src/com/navroopsingh/cordova/plugin" />
+        <source-file src="src/android/BootCompletedBroadcastReceiver.java" target-dir="src/com/navroopsingh/cordova/plugin" />
     </platform>
 </plugin>
