@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-truetimeandroidplugin" version="0.0.1">
+    <name>TruetimeandroidPlugin</name>
+
+    <description>An Android Cordova plugin that provides true time of the device</description>
+    <license>MIT</license>
+
+    <keywords>cordova,android,toast,message,alert</keywords>
+  
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+  
+    <js-module src="www/truetimeandroidplugin.js" name="truetimeandroidPlugin">
+        <clobbers target="window.plugins.truetimeandroidPlugin" />
+    </js-module>
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="TruetimeandroidPlugin">
+                <param name="android-package" value="com.navroopsingh.cordova.plugin.TruetimeandroidPlugin"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/TruetimeandroidPlugin.java" target-dir="src/com/navroopsingh/cordova/plugin" />
+    </platform>
+</plugin>

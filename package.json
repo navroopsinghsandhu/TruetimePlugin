@@ -1,0 +1,35 @@
+{
+  "name": "cordova-plugin-truetimeandroidplugin",
+  "version": "0.0.1",
+  "description": "An Android Cordova plugin that provides true time of the device",
+  "cordova": {
+    "id": "cordova-plugin-truetimeandroidplugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/navroopsinghsandhu/TruetimeandroidPlugin"
+  },
+  "keywords": [
+    "Toast",
+    "Notification",
+    "Message",
+    "Alert",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Navroop Singh <navroops806@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/navroopsinghsandhu/TruetimeandroidPlugin"
+  },
+  "homepage": "https://github.com/navroopsinghsandhu/TruetimeandroidPlugin"
+}
