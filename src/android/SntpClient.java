@@ -52,7 +52,11 @@ public class SntpClient {
     private static final int INDEX_ORIGINATE_TIME = 24;
     private static final int INDEX_RECEIVE_TIME = 32;
     private static final int INDEX_TRANSMIT_TIME = 40;
-
+    private static long T0 = 0;
+    private static long T1 = 0;
+    private static long T2 = 0;
+    private static long T3 = 0;
+    private static double DELAY = 0;
     // 70 years plus 17 leap days
     private static final long OFFSET_1900_TO_1970 = ((365L * 70L) + 17L) * 24L * 60L * 60L;
 
@@ -105,9 +109,10 @@ public class SntpClient {
             // -----------------------------------------------------------------------------------
             // get current time and write it to the request packet
 
-            long requestTime = System.currentTimeMillis();
-            long requestTicks = SystemClock.elapsedRealtime();
+            long requestTime = System.currentTimeMillis();                  // For T2
+            long requestTicks = SystemClock.elapsedRealtime();             // for T3
 
+            // defines T2 here
             writeTimeStamp(buffer, INDEX_TRANSMIT_TIME, requestTime);
 
             socket = new DatagramSocket();
@@ -122,22 +127,28 @@ public class SntpClient {
             socket.receive(response);
 
             long responseTicks = SystemClock.elapsedRealtime();
-            t[RESPONSE_INDEX_RESPONSE_TICKS] = responseTicks;
+            t[RESPONSE_INDEX_RESPONSE_TICKS] = responseTicks;           // for T3
 
             // -----------------------------------------------------------------------------------
             // extract the results
             // See here for the algorithm used:
             // https://en.wikipedia.org/wiki/Network_Time_Protocol#Clock_synchronization_algorithm
 
+            //T0, T1 are a part of the response from NTP server
             long originateTime = readTimeStamp(buffer, INDEX_ORIGINATE_TIME);     // T0
             long receiveTime = readTimeStamp(buffer, INDEX_RECEIVE_TIME);         // T1
             long transmitTime = readTimeStamp(buffer, INDEX_TRANSMIT_TIME);       // T2
             long responseTime = requestTime + (responseTicks - requestTicks);       // T3
-
+            
             t[RESPONSE_INDEX_ORIGINATE_TIME] = originateTime;
             t[RESPONSE_INDEX_RECEIVE_TIME] = receiveTime;
             t[RESPONSE_INDEX_TRANSMIT_TIME] = transmitTime;
             t[RESPONSE_INDEX_RESPONSE_TIME] = responseTime;
+
+            T0 = originateTime;
+            T1 = receiveTime;
+            T2 = transmitTime;
+            T3 = responseTime;
 
             // -----------------------------------------------------------------------------------
             // check validity of response
@@ -178,7 +189,9 @@ public class SntpClient {
                 throw new InvalidNtpServerResponseException("unsynchronized server responded for TrueTime");
             }
 
+            // delay = (T3 - T0) - (T2 - T1)
             double delay = Math.abs((responseTime - originateTime) - (transmitTime - receiveTime));
+            DELAY = delay;
             if (delay >= serverResponseDelayMax) {
                 throw new InvalidNtpServerResponseException(
                     "%s too large for comfort %f [actual] >= %f [expected]",
@@ -238,6 +251,21 @@ public class SntpClient {
      */
     long getCachedDeviceUptime() {
         return _cachedDeviceUptime.get();
+    }
+
+
+    public static long[] _getRawValues() {
+        long[] array = new long[4];
+        array[0] = T0;                         // T0
+        array[1] = T1;                         // T1
+        array[2] = T2;                         // T2
+        array[3] = T3;                         // T3
+
+        return array;
+    }
+
+    public static double _getDelay() {
+        return DELAY;           // (responseTime - originateTime) - (transmitTime - receiveTime)
     }
 
     // -----------------------------------------------------------------------------------

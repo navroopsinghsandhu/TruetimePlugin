@@ -42,7 +42,14 @@ public class TruetimeandroidPlugin extends CordovaPlugin {
     
     JSONObject options = new JSONObject();
     try {
-        options.putOpt("callback",  TrueTime.now());
+        options.putOpt("callback",  TrueTime.now());            // JSONObject.putOpt
+        long[] values = TrueTime.getRawValues();
+        options.putOpt("t0",   values[0]);
+        options.putOpt("t1",   values[1]);
+        options.putOpt("t2",   values[2]);
+        options.putOpt("t3",   values[3]);
+        options.putOpt("delay",   TrueTime.getDelay());
+       
     } catch (JSONException e) {
         callbackContext.sendPluginResult(new PluginResult(
                 PluginResult.Status.JSON_EXCEPTION));
@@ -77,7 +84,6 @@ class TrueTime {
         if (!isInitialized()) {
             throw new IllegalStateException("You need to call init() on TrueTime at least once.");
         }
-
         long cachedSntpTime = _getCachedSntpTime();
         long cachedDeviceUptime = _getCachedDeviceUptime();
         long deviceUptime = SystemClock.elapsedRealtime();
@@ -169,10 +175,10 @@ class TrueTime {
     // -----------------------------------------------------------------------------------
 
     protected void initialize(String ntpHost) throws IOException {
-        if (isInitialized()) {
-            TrueLog.i(TAG, "---- TrueTime already initialized from previous boot/init");
-            return;
-        }
+        // if (isInitialized()) {
+        //     TrueLog.i(TAG, "---- TrueTime already initialized from previous boot/init");
+        //     return;
+        // }
 
         requestTime(ntpHost);
         saveTrueTimeInfoToDisk();
@@ -220,6 +226,14 @@ class TrueTime {
         }
 
         return cachedSntpTime;
+    }
+
+    public static long[] getRawValues() {
+        return SNTP_CLIENT._getRawValues();
+    }
+
+    public static double getDelay() {
+        return SNTP_CLIENT._getDelay();
     }
 
 }
