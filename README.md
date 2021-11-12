@@ -6,7 +6,12 @@ It’s an Android Cordova plugin that provides true time of the device
 2. Then add the following code in www/index.js of your project                                                                                                    
     window.plugins.truetimeandroidPlugin.getTrueTime('', 'long', function(event) {                                                                               
           //This the success callback function                                                                                                                      
-          //you can access the data using "event['callback']"                                                                                                                   
+          //you can access the time using "event['callback']"                                                                                                   
+          //t0 using "event['t0']"                                                                                                                                                                
+          //t1 using "event['t1']"                                                                                                                                          
+          //t2 using "event['t2']"                                                                                                                                              
+          //t3 using "event['t3']"                                                                                                                                                      
+          //delay using "event['delay']"
         }, function(err) {                                                                                                                                      
           console.log('Uh oh.. ' + err);                                                                                                                   
         }); 
