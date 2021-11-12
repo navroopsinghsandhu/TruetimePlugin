@@ -10,3 +10,7 @@ It’s an Android Cordova plugin that provides true time of the device
         }, function(err) {                                                                                                                                      
           console.log('Uh oh.. ' + err);                                                                                                                   
         }); 
+
+To update the plugin run in your root:                                                                                                                                           
+1. cordova plugin remove truetimeandroidplugin                                                                                                                  
+2. cordova plugin add https://github.com/navroopsinghsandhu/TruetimeandroidPlugin 
