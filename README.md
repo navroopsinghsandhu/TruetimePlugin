@@ -1,6 +1,6 @@
 # TruetimePlugin
 It’s a Cordova plugin that provides true time of the device                                                                                                         
-For ios platform, the plugin is based on this library : https://github.com/instacart/TrueTime.swift , plugin provides an interface to communicate with this library
+For ios platform, the plugin is based on this library : https://github.com/instacart/TrueTime.swift , plugin provides an interface to communicate with this library                                                         
 For android, the plugin itself takes care of the TrueTime library code
 
 1. To add this plugin to your project run the following command in the root folder:                                                           
@@ -9,7 +9,7 @@ For android, the plugin itself takes care of the TrueTime library code
     window.plugins.truetimePlugin.getTrueTime('', 'long', function(event) {                                                                               
           //This the success callback function                                                                                                                      
           //you can access the timestamp for now() using "event['callback']"   
-          // please note that this timestamp comproses of t[3] + offset
+          // please note that this timestamp comprises of t[3] + offset
           //t0 using "event['t0']"                                                                                                                                                                
           //t1 using "event['t1']"                                                                                                                                          
           //t2 using "event['t2']"                                                                                                                                              
