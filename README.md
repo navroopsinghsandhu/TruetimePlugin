@@ -6,8 +6,9 @@ For android, the plugin itself takes care of the TrueTime library code
 1. To add this plugin to your project run the following command in the root folder:                                                           
     cordova plugin add https://github.com/navroopsinghsandhu/TruetimePlugin                                                                        
 2. Then add the following code in www/index.js of your project                                                                                                    
-    window.plugins.truetimePlugin.getTrueTime('', 'long', function(event) {                                                                               
-          //This the success callback function                                                                                                                      
+    window.plugins.truetimePlugin.getTrueTime('pool.ntp.org', 'long', function(event) {                                                                               
+          //This the success callback function                                                                                                                     
+          // "pool.ntp.org" can be replaced with any other NTP server url in the argument above
           //you can access the timestamp for now() using "event['callback']"   
           // please note that this timestamp comprises of t[3] + offset
           //t0 using "event['t0']"                                                                                                                                                                
