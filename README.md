@@ -1,4 +1,4 @@
-# TruetimeandroidPlugin
+# TruetimePlugin
 It’s an Android Cordova plugin that provides true time of the device
 
 1. To add this plugin to your project run the following command in the root folder:                                                           
