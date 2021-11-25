@@ -28,14 +28,18 @@ public class TruetimePlugin extends CordovaPlugin {
       }
     
     try {
+
+        //ntpUrl received from the javascript interface
+        String ntpUrl = args.getString(0);
+
         TrueTime.build()
                 //.withSharedPreferences(SampleActivity.this)
-                .withNtpHost("time.google.com")
+                .withNtpHost(ntpUrl)
                 .withLoggingEnabled(false)
                 // .withSharedPreferencesCache(App.this)
                 .withConnectionTimeout(3_1428)
                 .initialize();
-    } catch (IOException e) {
+    } catch (IOException  | JSONException e) {
         e.printStackTrace();
         Log.e(TAG, "something went wrong when trying to initialize TrueTime", e);
     }

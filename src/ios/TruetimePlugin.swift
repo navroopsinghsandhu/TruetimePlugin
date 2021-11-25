@@ -5,6 +5,8 @@ import TrueTime
   func getTime(command: CDVInvokedUrlCommand) {
       var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
         let client = TrueTimeClient.sharedInstance
+        //ntpUrl received from javascript interface
+         let ntpUrl = command.arguments![0]
         client.pause()
         client.start()
         client.fetchIfNeeded { result in

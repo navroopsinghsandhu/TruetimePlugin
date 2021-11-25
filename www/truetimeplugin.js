@@ -7,7 +7,7 @@ TruetimePlugin.prototype.getTrueTime = function(message, duration, successCallba
   var options = {};
   options.message = message;
   options.duration = duration;
-  cordova.exec(successCallback, errorCallback, 'TruetimePlugin', 'getTime', [options]);
+  cordova.exec(successCallback, errorCallback, 'TruetimePlugin', 'getTime', [options.messages]);
 }
 
 // Installation constructor that binds TruetimePlugin to window
