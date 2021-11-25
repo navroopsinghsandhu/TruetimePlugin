@@ -1,5 +1,7 @@
 # TruetimePlugin
-It’s an Android Cordova plugin that provides true time of the device
+It’s a Cordova plugin that provides true time of the device                                                                                                         
+For ios platform, the plugin is based on this library : https://github.com/instacart/TrueTime.swift , plugin provides an interface to communicate with this library
+For android, the plugin itself takes care of the TrueTime library code
 
 1. To add this plugin to your project run the following command in the root folder:                                                           
     cordova plugin add https://github.com/navroopsinghsandhu/TruetimePlugin                                                                        
