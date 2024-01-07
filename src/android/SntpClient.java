@@ -81,7 +81,7 @@ public class SntpClient {
         return ((response[RESPONSE_INDEX_RECEIVE_TIME] - response[RESPONSE_INDEX_ORIGINATE_TIME]) +
                 (response[RESPONSE_INDEX_TRANSMIT_TIME] - response[RESPONSE_INDEX_RESPONSE_TIME])) / 2;
     }
-
+    //( (T1 - T0) + (T2 - T3) )/ 2
     /**
      * Sends an NTP request to the given host and processes the response.
      *
@@ -100,7 +100,13 @@ public class SntpClient {
         try {
 
             byte[] buffer = new byte[NTP_PACKET_SIZE];
-            InetAddress address = InetAddress.getByName(ntpHost);
+
+            try{
+                InetAddress address = InetAddress.getByName(ntpHost);
+                System.out.println("Host Name" + address.getHostName());
+            } catch (Exception ex) {  
+                System.out.println(ex);  
+            }  
 
             DatagramPacket request = new DatagramPacket(buffer, buffer.length, address, NTP_PORT);
 

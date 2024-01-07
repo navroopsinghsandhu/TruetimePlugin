@@ -37,7 +37,7 @@ public class TruetimePlugin extends CordovaPlugin {
                 .withNtpHost(ntpUrl)
                 .withLoggingEnabled(false)
                 // .withSharedPreferencesCache(App.this)
-                .withConnectionTimeout(3_1428)
+                .withConnectionTimeout(2000)
                 .initialize();
     } catch (IOException  | JSONException e) {
         e.printStackTrace();
